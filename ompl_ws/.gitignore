@@ -1,4 +1,6 @@
 .build/
+ompl/
+omplapp/
 # pixi environments
 .pixi
 *.egg-info
