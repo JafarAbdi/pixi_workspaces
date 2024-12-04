@@ -1,0 +1,6 @@
+mujoco_mpc/
+mujoco/
+.build/
+# pixi environments
+.pixi
+*.egg-info

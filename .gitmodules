@@ -16,3 +16,9 @@
 [submodule "curobo_ws/external/curobo"]
 	path = curobo_ws/external/curobo
 	url = https://github.com/NVlabs/curobo.git
+[submodule "mujoco_ws/mujoco_mpc"]
+	path = mujoco_ws/mujoco_mpc
+	url = https://github.com/google-deepmind/mujoco_mpc
+[submodule "mujoco_ws/mujoco"]
+	path = mujoco_ws/mujoco
+	url = https://github.com/google-deepmind/mujoco/
