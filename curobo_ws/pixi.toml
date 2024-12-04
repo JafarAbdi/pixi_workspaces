@@ -1,0 +1,30 @@
+[project]
+authors = ["JafarAbdi <jafar.uruc@gmail.com>"]
+channels = ["conda-forge", "pytorch"]
+description = "Add a short description here"
+name = "curobo_workspace"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[activation.env]
+CUROBO_TORCH_CUDA_GRAPH_RESET = "1"
+
+[tasks]
+jupyter = "jupyter lab --ip=0.0.0.0"
+meshcat = "meshcat-server --open"
+
+[dependencies]
+python = "==3.11"
+pytorch = { version = "==2.5.1", channel = "pytorch" }
+setuptools = ">=75.5.0,<76"
+cuda-nvcc = ">=12.4.131,<13"
+matplotlib = ">=3.9.2,<4"
+jupyterlab = ">=4.3.1,<5"
+
+[pypi-options]
+no-build-isolation = ["nvidia-curobo"]
+
+[pypi-dependencies]
+nvidia-curobo = { path = "./external/curobo", editable = true, extras = [] }
+meshcat = ">=0.3.2, <0.4"
+transforms3d = ">=0.4.2, <0.5"

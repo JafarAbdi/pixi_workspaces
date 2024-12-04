@@ -1,0 +1,6 @@
+[submodule "omplapp"]
+	path = omplapp
+	url = https://github.com/ompl/omplapp.git
+[submodule "ompl"]
+	path = ompl
+	url = https://github.com/ompl/ompl
