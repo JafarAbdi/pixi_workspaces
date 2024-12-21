@@ -1,0 +1,18 @@
+[project]
+authors = ["JafarAbdi <jafar.uruc@gmail.com>"]
+channels = ["conda-forge", "pytorch"]
+description = "Add a short description here"
+name = "genesis_ws"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.11"
+pytorch = { version = "==2.5.1", channel = "pytorch" }
+
+[pypi-dependencies]
+genesis-world = ">=0.2.0, <0.3"
+ompl = { url = "https://github.com/ompl/ompl/releases/download/prerelease/ompl-1.6.0-cp311-cp311-manylinux_2_28_x86_64.whl" }
+

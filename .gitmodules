@@ -25,3 +25,6 @@
 [submodule "vamp_ws/vamp"]
 	path = vamp_ws/vamp
 	url = https://github.com/KavrakiLab/vamp.git
+[submodule "genesis_ws/Genesis"]
+	path = genesis_ws/Genesis
+	url = git@github.com:Genesis-Embodied-AI/Genesis.git
