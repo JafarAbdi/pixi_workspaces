@@ -28,3 +28,6 @@
 [submodule "genesis_ws/Genesis"]
 	path = genesis_ws/Genesis
 	url = git@github.com:Genesis-Embodied-AI/Genesis.git
+[submodule "llama_ws/llama.cpp"]
+	path = llama_ws/llama.cpp
+	url = git@github.com:ggerganov/llama.cpp.git
