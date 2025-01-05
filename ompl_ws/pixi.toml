@@ -6,6 +6,9 @@ name = "ompl_workspace"
 platforms = ["linux-64"]
 version = "0.1.0"
 
+[activation.env]
+CMAKE_INSTALL_MODE = "SYMLINK"
+CMAKE_INSTALL_PREFIX = "$CONDA_PREFIX"
 
 [tasks]
 configure = { cmd = [
@@ -22,16 +25,26 @@ configure = { cmd = [
   ".build/",
 ] }
 build = { cmd = "cmake --build .build/", depends_on = ["configure"] }
-
-test = { cmd = "ctest --output-on-failure", cwd = "build", depends_on = [
+install = { cmd = "cmake --install .build/ --prefix $CONDA_PREFIX", depends_on = [
+  "build",
+] }
+test = { cmd = "ctest --output-on-failure", cwd = ".build", depends_on = [
   "build",
 ] }
 
+build-wheel = { cmd = "python -m build --wheel", cwd = "ompl/py-bindings" }
+build-wheels = { cmd = "cibuildwheel py-bindings --platform linux", cwd = "ompl/", env = { CIBW_BUILD = "cp311-manylinux_x86_64", CIBW_BUILD_VERBOSITY = "1" } }
+
 [dependencies]
-compilers = ">=1.8.0,<2"
-cmake = ">=3.31.1,<4"
-pkg-config = ">=0.29.2,<0.30"
 eigen = ">=3.4.0,<4"
-make = ">=4.4.1,<5"
-ninja = ">=1.12.1,<2"
-libboost-devel = ">=1.86.0,<2"
+python = "==3.11"
+numpy = "==2.2.1"
+boost = ">=1.85.0,<2"
+libboost-python = ">=1.85.0,<2"
+cibuildwheel = ">=2.21.3,<3"
+
+[pypi-dependencies]
+pygccxml = ">=2.6.1, <3"
+pyplusplus = ">=1.8.5, <2"
+ninja = ">=1.11.1.3, <2"
+build = ">=1.2.2.post1, <2"
