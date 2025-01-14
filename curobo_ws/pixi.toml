@@ -8,10 +8,15 @@ version = "0.1.0"
 
 [activation.env]
 CUROBO_TORCH_CUDA_GRAPH_RESET = "1"
+PATH = "$CONDA_PREFIX/nvvm/bin:$PATH"
+CUDA_HOME = "$CONDA_PREFIX/targets/x86_64-linux"
 
 [tasks]
 jupyter = "jupyter lab --ip=0.0.0.0"
 meshcat = "meshcat-server --open"
+build-inplace = { cmd = "python setup.py build_ext --inplace", cwd = "external/curobo" }
+compdb = { cmd = "ninja -t compdb > ../compile_commands.json", cwd = "external/curobo/build/temp.linux-x86_64-cpython-311" }
+curobo-build = { depends-on = ["build-inplace", "compdb"] }
 
 [dependencies]
 python = "==3.11"
