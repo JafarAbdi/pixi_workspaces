@@ -22,12 +22,6 @@
 [submodule "mujoco_ws/mujoco"]
 	path = mujoco_ws/mujoco
 	url = https://github.com/google-deepmind/mujoco/
-[submodule "vamp_ws/vamp"]
-	path = vamp_ws/vamp
-	url = https://github.com/KavrakiLab/vamp.git
-[submodule "genesis_ws/Genesis"]
-	path = genesis_ws/Genesis
-	url = git@github.com:Genesis-Embodied-AI/Genesis.git
 [submodule "llama_ws/llama.cpp"]
 	path = llama_ws/llama.cpp
 	url = git@github.com:ggerganov/llama.cpp.git
