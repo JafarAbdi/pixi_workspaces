@@ -1,6 +1,6 @@
 [project]
 authors = ["JafarAbdi <jafar.uruc@gmail.com>"]
-channels = ["conda-forge", "pytorch"]
+channels = ["conda-forge", "pytorch", "nvidia"]
 description = "Add a short description here"
 name = "curobo_workspace"
 platforms = ["linux-64"]
@@ -8,23 +8,70 @@ version = "0.1.0"
 
 [activation.env]
 CUROBO_TORCH_CUDA_GRAPH_RESET = "1"
+PATH = "$CONDA_PREFIX/nvvm/bin:$PATH"
+CUDA_HOME = "$CONDA_PREFIX/targets/x86_64-linux"
 
 [tasks]
 jupyter = "jupyter lab --ip=0.0.0.0"
 meshcat = "meshcat-server --open"
+build-inplace = { cmd = "python setup.py build_ext --inplace", cwd = "external/curobo" }
+compdb = { cmd = "ninja -t compdb > ../compile_commands.json", cwd = "external/curobo/build/temp.linux-x86_64-cpython-310" }
+curobo-build = { depends_on = ["build-inplace", "compdb"] }
+build = { cmd = [
+  "cmake",
+  "-S",
+  "external/nvblox_torch/src/nvblox_torch/cpp",
+  "-B",
+  ".build",
+  "-DCMAKE_PREFIX_PATH=$CONDA_PREFIX/lib/python3.10/site-packages/torch/share/cmake/Torch",
+  "-Dglog_DIR=$CONDA_PREFIX/lib/cmake/glog",
+  "-DCUDA_TOOLKIT_ROOT_DIR=$CONDA_PREFIX/targets/x86_64-linux",
+  "-DCUDA_INCLUDE_DIRS=$CONDA_PREFIX/targets/x86_64-linux/include",
+  "-DCUDA_LIBRARY_DIRS=$CONDA_PREFIX/targets/x86_64-linux/lib",
+  "-DCUDA_CUDART_LIBRARY=$CONDA_PREFIX/targets/x86_64-linux/lib/libcudart.so",
+] }
+config-nvblox = { cmd = [
+  "cmake",
+  "-GNinja",
+  "-S",
+  "external/nvblox/nvblox",
+  "-B",
+  ".build/nvblox",
+  "-DCMAKE_PREFIX_PATH=$CONDA_PREFIX/lib/python3.10/site-packages/torch/share/cmake/Torch",
+  "-DCUDA_TOOLKIT_ROOT_DIR=$CONDA_PREFIX/targets/x86_64-linux",
+  "-DCUDA_INCLUDE_DIRS=$CONDA_PREFIX/targets/x86_64-linux/include",
+  "-DCUDA_CUDART_LIBRARY=$CONDA_PREFIX/targets/x86_64-linux/lib/libcudart.so",
+  "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+  "-DCMAKE_BUILD_TYPE=Release",
+
+  # "-DCUDA_nvToolsExt_LIBRARY=$CONDA_PREFIX/lib/libnvToolsExt.so.1",
+] }
+build-nvblox = { cmd = "cmake --build .build/nvblox" }
 
 [dependencies]
-python = "==3.11"
+python = "==3.10"
 pytorch = { version = "==2.5.1", channel = "pytorch" }
 setuptools = ">=75.5.0,<76"
 cuda-nvcc = ">=12.4.131,<13"
 matplotlib = ">=3.9.2,<4"
 jupyterlab = ">=4.3.1,<5"
+libxcrypt = ">=4.4.36,<5"
+glog = "==0.5.0"
+# nvblox dependencies
+cuda-thrust = ">=11.4.43,<12"
+benchmark = ">=1.9.1,<2"
+gtest = ">=1.15.2,<2"
+cuda-nvtx = ">=12.4.127,<13"
+cuda-toolkit = ">=12.4.1,<13"
+cuda-nvtx-dev = ">=12.4.127,<13"
+# cuda = ">=12.4.1,<13"
 
 [pypi-options]
 no-build-isolation = ["nvidia-curobo"]
 
 [pypi-dependencies]
 nvidia-curobo = { path = "./external/curobo", editable = true, extras = [] }
+nvblox_torch = { path = "./external/nvblox_torch", editable = true, extras = [
+] }
 meshcat = ">=0.3.2, <0.4"
 transforms3d = ">=0.4.2, <0.5"

@@ -31,3 +31,9 @@
 [submodule "llama_ws/llama.cpp"]
 	path = llama_ws/llama.cpp
 	url = git@github.com:ggerganov/llama.cpp.git
+[submodule "curobo_ws/external/nvblox_torch"]
+	path = curobo_ws/external/nvblox_torch
+	url = https://github.com/NVlabs/nvblox_torch.git
+[submodule "curobo_ws/external/nvblox"]
+	path = curobo_ws/external/nvblox
+	url = https://github.com/valtsblukis/nvblox
