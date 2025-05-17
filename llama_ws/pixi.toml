@@ -27,10 +27,27 @@ configure = { cmd = [
   "-B",
   ".build/",
 ] }
-build = { cmd = "cmake --build .build/", depends_on = ["configure"] }
-install = { cmd = "cmake --install .build/ --prefix $CONDA_PREFIX", depends_on = ["build"] }
+build = { cmd = "cmake --build .build/", depends-on = ["configure"] }
+install = { cmd = "cmake --install .build/ --prefix $CONDA_PREFIX", depends-on = [
+  "build",
+] }
+
+start = { cmd = [
+  "llama-server",
+  "-hf",
+  "ggml-org/gemma-3-12b-it-GGUF",
+  "--port",
+  "3030",
+  "--host",
+  "100.87.144.124",
+] }
+
+gguf-gui = "gguf-editor-gui"
 
 [dependencies]
 libcurl = ">=8.11.1,<9"
 cuda = "12.4.1"
 huggingface_hub = ">=0.26.5,<0.27"
+
+[pypi-dependencies]
+gguf = { path = "llama.cpp/gguf-py", extras = ["gui"] }
