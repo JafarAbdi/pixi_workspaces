@@ -1,0 +1,28 @@
+[project]
+authors = ["JafarAbdi <jafar.uruc@gmail.com>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "isaacsim_ws"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[activation.env]
+OMNI_KIT_ACCEPT_EULA = "YES"
+RMW_IMPLEMENTATION = "rmw_cyclonedds_cpp"
+CYCLONEDDS_URI = "$PIXI_PROJECT_ROOT/cyclonedds.xml"
+LD_LIBRARY_PATH = "$CONDA_PREFIX/lib"
+
+[tasks]
+
+[dependencies]
+# Isaac Sim only supports python 3.10. See https://pypi.nvidia.com/isaacsim/
+python = "3.10"
+
+[pypi-dependencies]
+isaacsim = { version = ">=4.5,<4.6", extras = [
+  "all",
+  "extscache",
+], index = "https://pypi.nvidia.com" }
+
+[system-requirements]
+libc = "2.34"
