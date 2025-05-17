@@ -1,9 +1,6 @@
 [submodule "cpp_ws"]
 	path = cpp_ws
 	url = git@github.com:JafarAbdi/cpp_playground.git
-[submodule "lerobot_ws"]
-	path = lerobot_ws
-	url = git@github.com:JafarAbdi/lerobot_workspace.git
 [submodule "ompl_ws/omplapp"]
 	path = ompl_ws/omplapp
 	url = https://github.com/ompl/omplapp.git
