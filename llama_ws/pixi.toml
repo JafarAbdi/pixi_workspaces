@@ -41,6 +41,28 @@ start = { cmd = [
   "--host",
   "100.87.144.124",
 ] }
+start-coder = { cmd = [
+  "llama-server",
+  "--hf-repo",
+  "ggml-org/Qwen2.5-Coder-3B-Instruct-Q8_0-GGUF",
+  "--hf-file",
+  "qwen2.5-coder-3b-instruct-q8_0.gguf",
+  "--port",
+  "8012",
+  "-ngl",
+  "99",
+  "-fa",
+  "-ub",
+  "1024",
+  "-b",
+  "1024",
+  "-dt",
+  "0.1",
+  "--ctx-size",
+  "0",
+  "--cache-reuse",
+  "256",
+] }
 
 gguf-gui = "gguf-editor-gui"
 
