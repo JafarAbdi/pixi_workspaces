@@ -21,8 +21,8 @@ configure = { cmd = [
   "-B",
   ".build/",
 ] }
-build = { cmd = "cmake --build .build/", depends_on = ["configure"] }
-install = { cmd = "cmake --install .build/", depends_on = ["build"] }
+build = { cmd = "cmake --build .build/", depends-on = ["configure"] }
+install = { cmd = "cmake --install .build/", depends-on = ["build"] }
 
 configure-mjpc = { cmd = [
   "cmake",
@@ -36,8 +36,8 @@ configure-mjpc = { cmd = [
   "-B",
   ".build/mjpc",
 ] }
-build-mjpc = { cmd = "cmake --build .build/mjpc --target mjpc", depends_on = ["configure-mjpc"] }
-install-mjpc = { cmd = "cmake --install .build/mjpc", depends_on = ["build-mjpc"] }
+build-mjpc = { cmd = "cmake --build .build/mjpc --target mjpc", depends-on = ["configure-mjpc"] }
+install-mjpc = { cmd = "cmake --install .build/mjpc", depends-on = ["build-mjpc"] }
 
 
 [dependencies]
