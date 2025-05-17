@@ -1,0 +1,35 @@
+diff --git a/.clangd b/.clangd
+index 8c76d81..33bf896 100644
+--- a/.clangd
++++ b/.clangd
+@@ -1,11 +1,18 @@
+----
+-Language: Cpp
+-BasedOnStyle: Google
+-ColumnLimit: 100
+-IncludeBlocks: Preserve
+-DerivePointerAlignment: false
+-PointerAlignment: Right
+----
+-Language: Proto
+-BasedOnStyle: Google
+-...
++CompileFlags:
++  CompilationDatabase: build/
++  Add:
++    - --cuda-path=/home/juruc/workspaces/pixi_workspaces/curobo_ws/.pixi/envs/default/targets/x86_64-linux
++    - --no-cuda-version-check
++  Remove:
++    - --generate-dependencies-with-compile
++    - --prec-sqrt=false
++    - --prec-div=false
++    - -gencode=arch=compute_89,code=compute_89
++    - -gencode=arch=compute_89,code=sm_89
++    - -ccbin
++    - --fmad=true
++    - --threads=8
++    - --dependency-output
++    - --ftz=true
++    - --expt-relaxed-constexpr
++    - --compiler-options
+
