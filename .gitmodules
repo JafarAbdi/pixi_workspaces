@@ -31,3 +31,6 @@
 [submodule "mujoco_ws/madrona_mjx"]
 	path = mujoco_ws/madrona_mjx
 	url = https://github.com/shacklettbp/madrona_mjx.git
+[submodule "whisper_ws/whisper.cpp"]
+	path = whisper_ws/whisper.cpp
+	url = git@github.com:ggerganov/whisper.cpp.git

@@ -1,0 +1,74 @@
+[project]
+authors = ["JafarAbdi <jafar.uruc@gmail.com>"]
+channels = ["conda-forge"]
+description = "Add a short description here"
+name = "whisper_ws"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[activation.env]
+CMAKE_INSTALL_MODE = "SYMLINK"
+CMAKE_INSTALL_PREFIX = "$CONDA_PREFIX"
+GGML_CUDA_ENABLE_UNIFIED_MEMORY = "1"
+
+[tasks]
+configure = { cmd = [
+  "cmake",
+  "-GNinja",
+  "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+  # "-DLLAMA_CURL=ON",
+  # "-DCURL_LIBRARY=$CONDA_PREFIX/lib/libcurl.so",
+  # "-DCURL_INCLUDE_DIR=$CONDA_PREFIX/include",
+  # "-DCURL_NO_CURL_CMAKE=ON",
+  "-DWHISPER_SDL2=ON",
+  "-DGGML_CUDA=ON",
+  "-S",
+  "whisper.cpp/",
+  "-B",
+  "build/",
+] }
+build = { cmd = "cmake --build build/ --config Release", depends-on = [
+  "configure",
+] }
+install = { cmd = "cmake --install build/ --prefix $CONDA_PREFIX", depends-on = [
+  "build",
+] }
+
+download-model = "sh whisper.cpp/models/download-ggml-model.sh "
+
+configure-em = { cmd = [
+  "emcmake",
+  "cmake",
+  # "-GNinja",
+  # "-DWHISPER_SDL2=ON",
+  # "-DCMAKE_TOOLCHAIN_FILE=$CONDA_PREFIX/lib/emscripten-3.1.58/cmake/Modules/Platform/Emscripten.cmake",
+  # "-DGGML_CUDA=ON",
+  "-S",
+  "whisper.cpp/",
+  "-B",
+  "whisper.cpp/build-em/",
+] }
+build-em = { cmd = "cmake --build build-em/ --config Release", depends-on = [
+  "configure-em",
+] }
+
+[dependencies]
+libcurl = ">=8.11.1,<9"
+cuda = "12.4.1"
+huggingface_hub = ">=0.26.5,<0.27"
+sdl2 = ">=2.30.7,<3"
+# Server
+python = ">=3.11,<3.12"
+# emscripten = ">=3.1.58,<4"
+# cmake = ">=3.31.5,<4"
+# compilers = ">=1.7.0,<2"
+# ninja = ">=1.12.1,<2"
+# clang = ">=20.1.1,<21"
+# clangxx = ">=20.1.1,<21"
+# gxx = ">=12.4.0,<12.5"
+# gcc = ">=12.4.0,<12.5"
+# gcc_linux-64 = ">=12.4.0,<13"
+# gxx_linux-64 = ">=12.4.0,<13"
+# pthread-stubs = ">=0.4,<0.5"
+# lld = ">=20.1.1,<21"
+# libstdcxx = ">=14.2.0,<15"
