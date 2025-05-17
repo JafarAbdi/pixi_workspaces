@@ -10,9 +10,6 @@
 [submodule "ompl_ws/ompl"]
 	path = ompl_ws/ompl
 	url = https://github.com/ompl/ompl
-[submodule "behaviortree_ws/external/BehaviorTree.CPP"]
-	path = behaviortree_ws/external/BehaviorTree.CPP
-	url = git@github.com:BehaviorTree/BehaviorTree.CPP.git
 [submodule "curobo_ws/external/curobo"]
 	path = curobo_ws/external/curobo
 	url = https://github.com/NVlabs/curobo.git

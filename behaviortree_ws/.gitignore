@@ -1,5 +1,0 @@
-.build
-external
-# pixi environments
-.pixi
-*.egg-info
