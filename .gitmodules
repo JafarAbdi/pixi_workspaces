@@ -22,3 +22,12 @@
 [submodule "llama_ws/llama.cpp"]
 	path = llama_ws/llama.cpp
 	url = git@github.com:ggerganov/llama.cpp.git
+[submodule "mujoco_ws/mujoco_playground"]
+	path = mujoco_ws/mujoco_playground
+	url = https://github.com/google-deepmind/mujoco_playground.git
+[submodule "mujoco_ws/mujoco_warp"]
+	path = mujoco_ws/mujoco_warp
+	url = https://github.com/google-deepmind/mujoco_warp
+[submodule "mujoco_ws/madrona_mjx"]
+	path = mujoco_ws/madrona_mjx
+	url = https://github.com/shacklettbp/madrona_mjx.git

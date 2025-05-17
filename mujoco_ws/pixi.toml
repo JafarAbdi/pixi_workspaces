@@ -6,6 +6,10 @@ name = "mujoco_workspace"
 platforms = ["linux-64"]
 version = "0.1.0"
 
+[activation.env]
+MADRONA_MWGPU_KERNEL_CACHE = "build/kernel_cache"
+MADRONA_BVH_KERNEL_CACHE = "build/bvh_cache"
+
 [target.unix.activation.env]
 CMAKE_INSTALL_PREFIX = "$CONDA_PREFIX"
 
@@ -36,15 +40,49 @@ configure-mjpc = { cmd = [
   "-B",
   ".build/mjpc",
 ] }
-build-mjpc = { cmd = "cmake --build .build/mjpc --target mjpc", depends-on = ["configure-mjpc"] }
-install-mjpc = { cmd = "cmake --install .build/mjpc", depends-on = ["build-mjpc"] }
+build-mjpc = { cmd = "cmake --build .build/mjpc --target mjpc", depends-on = [
+  "configure-mjpc",
+] }
+install-mjpc = { cmd = "cmake --install .build/mjpc", depends-on = [
+  "build-mjpc",
+] }
+
+configure-madrona = { cmd = [
+  "cmake",
+  "-GNinja",
+  "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+  "-DCMAKE_BUILD_TYPE=Release",
+  "-S",
+  "madrona_mjx/",
+  "-B",
+  "madrona_mjx/build",
+] }
+build-madrona = { cmd = "cmake --build madrona_mjx/build", depends-on = [
+  "configure-madrona",
+] }
+install-madrona = { cmd = "cmake --install madrona_mjx/build", depends-on = [
+  "build-madrona",
+] }
 
 
 [dependencies]
 glfw = ">=3.4,<4"
+python = ">=3.11,<3.12"
+cuda-nvcc = ">=12.4.131,<13"
+cuda = "12.4.1"
+cudnn = ">=9.8.0.87,<10"
+vulkan-tools = ">=1.3.250,<2"
+
+[pypi-dependencies]
+playground = { path = "mujoco_playground", editable = true, extras = ["all"] }
+mujoco-warp = { path = "mujoco_warp", editable = true }
+madrona_mjx = { path = "madrona_mjx", editable = true }
+jax = { version = "*", extras = ["cuda12_local"] }
 
 [host-dependencies]
 ninja = ">=1.12.1,<2"
-cmake = "3.22.*"
-xorg-libxcursor = ">=1.2.3,<2"
-xorg-libxi = ">=1.8.2,<2"
+cmake = "3.31.*"
+xorg-libxcursor = "*"
+xorg-libxi = "*"
+xorg-libxrandr = "*"
+mesalib = "*"
