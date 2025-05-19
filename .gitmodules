@@ -34,3 +34,6 @@
 [submodule "whisper_ws/whisper.cpp"]
 	path = whisper_ws/whisper.cpp
 	url = git@github.com:ggerganov/whisper.cpp.git
+[submodule "cuda_rrt_ws/pRRTC"]
+	path = cuda_rrt_ws/pRRTC
+	url = https://github.com/CoMMALab/pRRTC.git
