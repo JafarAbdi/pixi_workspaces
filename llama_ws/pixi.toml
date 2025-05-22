@@ -32,6 +32,13 @@ install = { cmd = "cmake --install .build/ --prefix $CONDA_PREFIX", depends-on =
   "build",
 ] }
 
+start-qwen = { cmd = [
+  "llama-server",
+  "-hf",
+  "ggml-org/Qwen2.5-VL-7B-Instruct-GGUF",
+  "-ngl",
+  "99",
+] }
 start = { cmd = [
   "llama-server",
   "-hf",
@@ -73,3 +80,5 @@ huggingface_hub = ">=0.26.5,<0.27"
 
 [pypi-dependencies]
 gguf = { path = "llama.cpp/gguf-py", extras = ["gui"] }
+fg = "*"
+openai = ">=1.79.0, <2"
