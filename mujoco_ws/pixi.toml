@@ -64,20 +64,34 @@ install-madrona = { cmd = "cmake --install madrona_mjx/build", depends-on = [
   "build-madrona",
 ] }
 
+viewer = { cmd = [
+  "python",
+  "aloha_sim/aloha_sim/viewer.py",
+  "--policy=no_policy",
+  "--task_name=MarkerRemoveLid",
+], env = { MUJOCO_GL = "egl" } }
+
 
 [dependencies]
 glfw = ">=3.4,<4"
 python = ">=3.11,<3.12"
 cuda-nvcc = ">=12.4.131,<13"
 cuda = "12.4.1"
-cudnn = ">=9.8.0.87,<10"
+cudnn = ">=9.10.1.4,<10"
 vulkan-tools = ">=1.3.250,<2"
 
 [pypi-dependencies]
 playground = { path = "mujoco_playground", editable = true, extras = ["all"] }
-mujoco-warp = { path = "mujoco_warp", editable = true }
+# mujoco-warp = { path = "mujoco_warp", editable = true, extras = [
+#   "dev",
+#   "cuda",
+# ] }
 madrona_mjx = { path = "madrona_mjx", editable = true }
+aloha_sim = { path = "aloha_sim", editable = true }
 jax = { version = "*", extras = ["cuda12_local"] }
+tensorflow = { version = ">=2.19.0, <3", extras = ["and-cuda"] }
+# warp-lang = { url = "https://pypi.nvidia.com/warp-lang/warp_lang-1.8.0.dev20250627-py3-none-manylinux_2_28_x86_64.whl" }
+# mujoco = { url = "https://py.mujoco.org/mujoco/mujoco-3.3.3.dev764388588-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl" }
 
 [host-dependencies]
 ninja = ">=1.12.1,<2"
