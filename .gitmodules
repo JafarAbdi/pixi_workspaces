@@ -46,6 +46,3 @@
 [submodule "mujoco_ws/aloha_sim"]
 	path = mujoco_ws/aloha_sim
 	url = https://github.com/google-deepmind/aloha_sim
-[submodule "fast_kinematics_ws/fast_kinematics"]
-	path = fast_kinematics_ws/fast_kinematics
-	url = git@github.com:Lexseal/fast_kinematics.git
