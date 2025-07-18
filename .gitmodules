@@ -37,3 +37,18 @@
 [submodule "cuda_rrt_ws/pRRTC"]
 	path = cuda_rrt_ws/pRRTC
 	url = https://github.com/CoMMALab/pRRTC.git
+[submodule "newton_ws/newton"]
+	path = newton_ws/newton
+	url = https://github.com/newton-physics/newton.git
+[submodule "open_imu_camera_calibrator_ws/OpenImuCameraCalibrator"]
+	path = open_imu_camera_calibrator_ws/OpenImuCameraCalibrator
+	url = git@github.com:urbste/OpenImuCameraCalibrator.git
+[submodule "open_imu_camera_calibrator_ws/pyTheiaSfM"]
+	path = open_imu_camera_calibrator_ws/pyTheiaSfM
+	url = https://github.com/urbste/pyTheiaSfM
+[submodule "mujoco_ws/aloha_sim"]
+	path = mujoco_ws/aloha_sim
+	url = https://github.com/google-deepmind/aloha_sim
+[submodule "fast_kinematics_ws/fast_kinematics"]
+	path = fast_kinematics_ws/fast_kinematics
+	url = git@github.com:Lexseal/fast_kinematics.git
